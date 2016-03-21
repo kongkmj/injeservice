@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>KongTech</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="/bower_components/datatables-responsive/css/responsive.dataTables.scss" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src = "http://maps.googleapis.com/maps/api/js">
+    </script>
+
+    <script>
+        var organization = new google.maps.LatLng(38.2403733,128.1993238);
+
+        function HomeControl(controlDiv,map) {
+            controlDiv.style.padding='5px';
+
+            var controlUI= document.createElement('div');
+            controlUI.style.backgroundColor='white';
+            controlUI.style.border='1px';
+            controlUI.style.cursor='pointer';
+            controlUI.style.textAlign='center';
+            controlUI.title =' set map to Home';
+            controlDiv.appendChild(controlUI);
+
+            var controlText = document.createElement('div');
+            controlText.style.fontFamily='Arial.sans-serif';
+            controlText.style.fontSize='12px';
+            controlText.style.paddingLeft='4px';
+            controlText.style.paddingRight='4px';
+            controlText.innerHTML ='<b>UN지속가능발전교육 인제 전문센터(RCE)<b>'
+            controlUI.appendChild(controlText);
+
+            google.maps.event.addDomListener(controlUI,'click',function () {
+                map.setCenter(organization,38.2403733,128.1993238)
+            });
+        }
+
+        function initialize() {
+
+            var mapDiv = document.getElementById('googleMap');
+            var mapProp={
+                center:organization,
+                zoom:15,
+                zoomControl:true,
+                zoomControlOptions: {
+                    style:google.maps.ZoomControlStyle.SMALL
+                },
+
+                mapTypeId:google.maps.MapTypeId.ROADMAP
+            };
+
+            var map = new google.maps.Map(mapDiv,mapProp);
+
+            //홈 컨트롤
+            var HomeControlDiv = document.createElement('div');
+            var homeControl = new HomeControl(HomeControlDiv,map);
+            //homeControlDiv.index = 1;
+            map.controls[google.maps.ControlPosition.TOP_RIGHT].push(HomeControlDiv);
+
+            //마커
+            var marker = new google.maps.Marker({
+                position : organization,
+                animation:google.maps.Animation.BOUNCE
+            });
+
+            marker.setMap(map);
+
+            var infowindow = new google.maps.InfoWindow({
+                content:"<b>UN지속가능발전교육 인제 전문센터(RCE)<b>"
+            });
+
+            infowindow.open(map,marker);
+
+
+        }
+
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">KongTech</a>
+        </div>
+        <!-- /.navbar-header -->
+
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-messages">
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong>관리자</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>1일전</em>
+                                    </span>
+                            </div>
+                            <div>꽃꽂이 수업에 불참 했습니다.</div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong>관리자</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>2일전</em>
+                                    </span>
+                            </div>
+                            <div>에어로빅 A반 수업 불참 사유 제출 바랍니다.</div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong>관리자</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>3일전</em>
+                                    </span>
+                            </div>
+                            <div>컴퓨터 엑셀 초급반 휴강 안내</div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-center" href="#">
+                            <strong>모든 메세지 보기</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-messages -->
+            </li>
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-tasks">
+                    <li>
+                        <a href="#">
+                            <div>
+                                <p>
+                                    <strong>꽃꽂이 수업</strong>
+                                    <span class="pull-right text-muted">40% 완료</span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                        <span class="sr-only">40% Complete (success)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <p>
+                                    <strong>에어로빅 A반</strong>
+                                    <span class="pull-right text-muted">20% 완료</span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                        <span class="sr-only">20% Complete</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <p>
+                                    <strong>컴퓨터 엑셀 초급반</strong>
+                                    <span class="pull-right text-muted">60% 완료</span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                        <span class="sr-only">60% Complete (warning)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <p>
+                                    <strong>초급 영어 회화</strong>
+                                    <span class="pull-right text-muted">80% 완료</span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                        <span class="sr-only">80% Complete (danger)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-center" href="#">
+                            <strong>모든 수업</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-tasks -->
+            </li>
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-alerts">
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-comment fa-fw"></i> 새 댓글
+                                <span class="pull-right text-muted small">4 분전</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-envelope fa-fw"></i> 새 메세지
+                                <span class="pull-right text-muted small">4 분전</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-tasks fa-fw"></i> 꽃꽂이 수업
+                                <span class="pull-right text-muted small">4 분전</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                <span class="pull-right text-muted small">4 분전</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-center" href="#">
+                            <strong>모든 알림 보기</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-alerts -->
+            </li>
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> 사용자 정보</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> 설정</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="/login"><i class="fa fa-sign-out fa-fw"></i> 로그아웃</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+        <!-- /.navbar-top-links -->
+
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="sidebar-search">
+                        <div class="input-group custom-search-form">
+                            <input type="text" class="form-control" placeholder="Search.">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <!-- /input-group -->
+                    </li>
+
+                    <li>
+                        <a href="/lecture"><i class="fa fa-table fa-fw"></i> 강의관리</a>
+                    </li>
+                    <li>
+                        <a href="/user"><i class="fa fa-table fa-fw"></i> 학생관리</a>
+                    </li>
+                    <li>
+                        <a href="/blank"><i class="fa fa-table fa-fw"></i> 사용방법</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <b class="page-header"><font size="10">UN지속가능발전교육 인제 전문센터(RCE)</font></b>
+                 <button type="submit" class="btn btn-success">완료</button>
+                <a href="/organ" class="btn btn-warning"   >취소</a>
+                <a href="/" class="btn btn-danger"   >삭제</a>
+            </div>
+            <!-- /.col-lg-12 -->
+    </div>
+
+        <!-- /.table-responsive -->
+        <div class="well">
+            <div class="organ-edit">
+                <form class="organ_form" action="/organ/<%=data2._id%>?_method=put" method="post">
+                <table class="table table-striped table-bordered table-hover">
+
+                <tr><td>기관명</td><td><input type="text" name="post2[organ]" value="<%=data2.organ%>"></td><td width="30%" rowspan="10"><div id = "googleMap" style="width:500px;height:380px;"></div></td></tr>
+                <tr><td>지역</td><td><input type="text" name="pos2t[region]" value="<%=data2.region%>"></td></tr>
+                <tr><td>기관유형</td><td><input type="text" name="post2[index]" value="<%=data2.index%>"></td></tr>
+                <tr><td>전화번호</td><td><input type="text" name="post2[phone]" value="<%=data2.phone%>"></td></tr>
+                <tr><td>팩스번호</td><td><input type="text" name="post2[faxphone]" value="<%=data2.faxphone%>"></td></tr>
+                <tr><td>주소</td><td><input type="text" name="post2[adress]" value="<%=data2.adress%>"></td></tr>
+                <tr><td>이메일</td><td><input type="text" name="post2[email]" value="<%=data2.email%>"></td></tr>
+                <tr><td>담당자</td><td><input type="text" name="post2[person]" value="<%=data2.person%>"></td></tr>
+                <tr><td>홈페이지</td><td><input type="text" name="post2[homepage]" value="<%=data2.homepage%>"></td></tr>
+                <tr><td>첨부파일</td><td></td></tr>
+            </table>
+            <h4><textarea name="post[content]"><%=data2.content%></textarea></h4>
+
+                    <form>
+            </div>
+        </div>
+
+
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<!-- jQuery -->
+<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+<!-- DataTables JavaScript -->
+<script src="/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/dist/js/sb-admin-2.js"></script>
+
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+    });
+</script>
+
+</body>
+
+</html>
