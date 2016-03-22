@@ -21,39 +21,12 @@ db.on("error",function (err) {
 
 
 //model setting
-
-
-var organSchema = mongoose.Schema({
-    organ:{type:String,required:true},
-    region:{type:String,required:true},
-    index:{type:String,required:true},
-    phone:{type:String,required:true},
-  faxphone:{type:String,required:true},
-  adress:{type:String,required:true},
-  email:{type:String,required:true},
-  person:{type:String,required:true},
-  homepage:{type:String,required:true},
-  file:{type:String,required:true},
-  content:{type:String,required:true},
-  createdAt: {type:Date, default:Date.now}
-});
-var Organ = mongoose.model('post2',organSchema);
-
-
-var mongoose = require('mongoose');
-var express = require('express');
-var app = express();
-var classList = mongoose.Schema({
-  organ: {type: String, required: true},
-  class: {type: String, required: true},
-  index: {type: String, required: true},
-  startdate: {type: String, required: true},
-  enddate: {type: String, required: true},
-  personnumber: {type: String, required: true},
-  instructor: {type: String, required: true},
-  createdAt: {type: Date, default: Date.now}
-});
-var ClassList = mongoose.model('list', classList);
+/*
+var classListSchema = require('./model/class-list');
+var ClassList = mongoose.model('list', classListSchema);
+*/
+var classinputSchema = require('./model/class-input');
+var classinput = mongoose.model('list', classinputSchema);
 
 
 //view setting
@@ -88,47 +61,54 @@ app.get('/signup',function(req,res){
 
 ///index-class-list
 app.get('/class-list',function(req,res){
-  ClassList.find({}).sort('-createdAt').exec(function(err,list){
+  classinput.find({}).sort('-createdAt').exec(function(err,list){
     if(err) return res.json({success:false,message:err});
-    res.render("partials/lecture/class-list-input",{data:list});
+    res.render("partials/lecture/class-list",{data:list});
   });
 });
 //create
 app.post('/class-list', function(req,res){
   console.log(req.body);
-  ClassList.create(req.body.list,function (err,list) {
+  classinput.create(req.body.list,function (err,list) {
     if(err) return res.json({success:false, message:err});
     //res.json({success:true,message:list});
     res.redirect('/class-list');
   });
 });
+//new
+app.get('/class-input', function(req,res){
+  classinput.findById(req.params.id, function (err,list) {
+    if(err) return res.json({success:false, message:err});
+    res.render("partials/lecture/class-list-input", {data:list});
+  });
+});
 //show
 app.get('/class-list/:id', function(req,res){
-  ClassList.findById(req.params.id, function (err,list) {
+  classinput.findById(req.params.id, function (err,list) {
     if(err) return res.json({success:false, message:err});
-    res.render("partials/lecture/class-list", {data:list});
+    res.render("partials/lecture/class-info", {data:list});
   });
 });
 //edit
 app.get('/class-list/:id/edit', function(req,res){
-  ClassList.findById(req.params.id, function (err,list) {
+  classinput.findById(req.params.id, function (err,list) {
     if(err) return res.json({success:false, message:err});
-    res.render("partials/lecture/class-list", {data:list});
+    res.render("partials/lecture/class-list-edit", {data:list});
   });
 });
 //update
 app.put('/class-list/:id', function(req,res){
-  req.body.post.updatedAt=Date.now();
-  ClassList.findByIdAndUpdate(req.params.id, req.body.post, function (err,list) {
+  req.body.list.updatedAt=Date.now();
+  classinput.findByIdAndUpdate(req.params.id, req.body.list, function (err,list) {
     if(err) return res.json({success:false, message:err});
-    res.redirect('/partials/'+req.params.id);
+    res.redirect('/class-list/'+req.params.id);
   });
 });
 //delete
 app.delete('/class-list/:id', function(req,res){
-  ClassList.findByIdAndRemove(req.params.id, function (err,list) {
+  classinput.findByIdAndRemove(req.params.id, function (err,list) {
     if(err) return res.json({success:false, message:err});
-    res.redirect('/partials/lecture/class-list');
+    res.redirect('/class-list');
   });
 });
 
@@ -179,7 +159,7 @@ app.delete('/lecture/:id', function(req,res){
 
 ///index-user-list
 app.get('/user-list',function(req,res){
-  ClassList.find({}).sort('-createdAt').exec(function(err,posts){
+  classinput.find({}).sort('-createdAt').exec(function(err,posts){
     if(err) return res.json({success:false, message:err});
     res.render('partials/user/user-list',{data:posts});
   });
@@ -268,7 +248,7 @@ app.delete('/organ/:id', function(req,res){
 });
 ///index-class-info
 app.get('/class-info',function(req,res){
-  ClassList.find({}).sort('-createdAt').exec(function(err,posts){
+  classinput.find({}).sort('-createdAt').exec(function(err,posts){
     if(err) return res.json({success:false, message:err});
     res.render('partials/lecture/class-info',{data:posts});
   });
@@ -313,7 +293,7 @@ app.delete('/class-info/:id', function(req,res){
 
 ///index-user-info
 app.get('/user-info',function(req,res){
-  ClassList.find({}).sort('-createdAt').exec(function(err,posts){
+  classinput.find({}).sort('-createdAt').exec(function(err,posts){
     if(err) return res.json({success:false, message:err});
     res.render('partials/user/user-info',{data:posts});
   });

@@ -12,16 +12,16 @@
     <title>KongTech</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -300,9 +300,13 @@
 
         <!-- Page Content -->
         <div id="page-wrapper">
+            <form class="class_form" action="/class-list" method="post">
             <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header"><b>진로체험(우리 가족은 친환경농업인)</b><a href="#"   class="btn btn-warning"  >수정</a><a href="#"   class="btn btn-danger"  >삭제</a></h1>
+                <div class="col-md-8">
+                    <h1><b>진로체험(우리 가족은 친환경농업인)</b></h1>
+                </div>
+                <div class="col-md-4" style="text-align:right;padding-top:35px;">
+                 <button type="submit"class="btn btn-success">추가</button><a href="/class-list"   class="btn btn-danger"  >취소</a>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -310,21 +314,24 @@
             <!-- /.table-responsive -->
             <div class="well">
                 <table class="table table-striped table-bordered table-hover">
-                    <tr><td>강좌명</td><td><input class="formcontrol" size="52%"></td></tr>
-                    <tr><td>강좌명</td><td><input class="formcontrol" size="52%"></td></tr>
-                    <tr><td>강좌상태</td><td colspan="3"><input class="formcontrol"></td></tr>
-                    <tr><td>강좌구분</td><td colspan="3"><input class="formcontrol"></td></tr>
-                    <tr><td>기관명</td><td><input class="formcontrol"size="52"></td><td>강좌분야</td><td><input class="formcontrol"></td></tr>
-                    <tr><td>강사명</td><td><input class="formcontrol"></td><td>교육대상</td><td><input class="formcontrol"></td></tr>
-                    <tr><td>접수기간</td><td><input class="formcontrol" size="52%"></td><td>교육기간</td><td><input class="formcontrol"size="52%"></td></tr>
-                    <tr><td>교육요일</td><td><input class="formcontrol" size="52%"></td><td>교육시간</td><td><input class="formcontrol"></td></tr>
-                    <tr><td>교육장소</td><td colspan="3"><input class="formcontrol" size="52%"></td></tr>
-                    <tr><td>모집정원</td><td><input class="formcontrol"></td><td>예비정원</td><td><input class="formcontrol"></td></tr>
-                    <tr><td>수강료구분</td><td><input class="formcontrol"></td><td>재료비구분</td><td><input class="formcontrol"></td></tr>
-                    <tr><td>수강료</td><td><input class="formcontrol"></td><td>재료비</td><td><input class="formcontrol"></td></tr>
-                    <tr><td>접수방법</td><td><input class="formcontrol"></td><td>연락처</td><td><input class="formcontrol"></td></tr>
-                    <tr><td>내용</td><td colspan="3"><textarea style="width:900px; height:300px;"></textarea></td></tr>
+
+                    <tr><td>강좌명</td><td colspan="3"><input class="formcontrol"size="50%" name="list[class]" value=""></td></tr>
+                    <tr><td>강좌상태</td><td colspan="3"><input class="formcontrol"name="list[class_state]"value=""></td></tr>
+                    <tr><td>강좌구분</td><td ><input class="formcontrol"name="list[class_index]"value=""></td><td>강좌분야</td><td><input class="formcontrol"name="list[class_field]"value=""></td></tr>
+                    <tr><td>기관명</td><td><input class="formcontrol"size="50%"name="list[organ]"value=""></td><td>교육대상</td><td><input class="formcontrol"name="list[user_index]"value=""></td></tr>
+                    <tr><td>강사명</td><td><input class="formcontrol"name="list[instructor]"value=""></td><td>시작일시</td><td><input class="formcontrol"name="list[startdate]"value=""></td></tr>
+                    <tr><td>접수기간</td><td><input class="formcontrol"name="list[deadline]"value=""></td><td>종료일시</td><td><input class="formcontrol"name="list[enddate]"value=""></td></tr>
+                    <tr><td>교육요일</td><td><input class="formcontrol"name="list[edu_day]"value=""></td><td>교육시간</td><td><input class="formcontrol"name="list[edu_time]"value=""></td></tr>
+                    <tr><td>교육장소</td><td colspan="3"><input class="formcontrol"size="50%"name="list[edu_place]"value=""></td></tr>
+                    <tr><td>모집정원</td><td><input class="formcontrol"name="list[volume_full]"value=""></td><td>예비정원</td><td><input class="formcontrol"name="list[volume_reserve]"value=""></td></tr>
+                    <tr><td>수강료구분</td><td><input class="formcontrol"name="list[edu_cost_index]"value=""></td><td>재료비구분</td><td><input class="formcontrol"name="list[material_cost_index]"value=""></td></tr>
+                    <tr><td>수강료</td><td><input class="formcontrol"name="list[edu_cost]"value=""></td><td>재료비</td><td><input class="formcontrol"name="list[material_cost]"value=""></td></tr>
+                    <tr><td>접수방법</td><td><input class="formcontrol"name="list[register_method]"value=""></td><td>연락처</td><td><input class="formcontrol"name="list[phone]"value=""></td></tr>
+                    <tr><td>내용</td><td colspan="3"><textarea style="width:1100px; height:300px;" class="form-control"name="list[content]"></textarea></td></tr>
+
                 </table>
+                </div>
+            </form>
             </div>
 
         </div>
