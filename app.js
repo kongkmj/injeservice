@@ -427,6 +427,6 @@ app.delete('/instructor-info/:id', function(req,res){
   });
 });
 //start server
-app.listen(3000,function () {
-  console.log('Server listening at port:3000');
+app.listen(80,function () {
+  console.log('Server listening at port:80');
 });
