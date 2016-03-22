@@ -23,7 +23,7 @@ db.on("error",function (err) {
 //model setting
 /*
 var classListSchema = require('./model/class-list');
-var ClassList = mongoose.model('list', classListSchema);
+var classinput = mongoose.model('list', classListSchema);
 */
 var classinputSchema = require('./model/class-input');
 var classinput = mongoose.model('list', classinputSchema);
@@ -114,7 +114,7 @@ app.delete('/class-list/:id', function(req,res){
 
 ///index-lecture
 app.get('/lecture',function(req,res){
-  ClassList.find({}).sort('-createdAt').exec(function(err,posts){
+  classinput.find({}).sort('-createdAt').exec(function(err,posts){
     if(err) return res.json({success:false, message:err});
     res.render('partials/lecture/lecture',{data:posts});
   });
@@ -122,21 +122,21 @@ app.get('/lecture',function(req,res){
 //create
 app.post('/lecture', function(req,res){
   console.log(req.body);
-  ClassList.create(req.body.post,function (err,post) {
+  classinput.create(req.body.post,function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.redirect('partials/lecture/lecture');
   });
 });
 //show
 app.get('/lecture/:id', function(req,res){
-  ClassList.findById(req.params.id, function (err,post) {
+  classinput.findById(req.params.id, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.render("partials/lecture/lecture", {data:post});
   });
 });
 //edit
 app.get('/lecture/:id/edit', function(req,res){
-  ClassList.findById(req.params.id, function (err,post) {
+  classinput.findById(req.params.id, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.render("partials/lecture/lecture", {data:post});
   });
@@ -144,14 +144,14 @@ app.get('/lecture/:id/edit', function(req,res){
 //update
 app.put('/lecture/:id', function(req,res){
   req.body.post.updatedAt=Date.now();
-  ClassList.findByIdAndUpdate(req.params.id, req.body.post, function (err,post) {
+  classinput.findByIdAndUpdate(req.params.id, req.body.post, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.redirect('/partials/'+req.params.id);
   });
 });
 //delete
 app.delete('/lecture/:id', function(req,res){
-  ClassList.findByIdAndRemove(req.params.id, function (err,post) {
+  classinput.findByIdAndRemove(req.params.id, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.redirect('/partials/lecture/lecture');
   });
@@ -167,21 +167,21 @@ app.get('/user-list',function(req,res){
 //create
 app.post('/user-list', function(req,res){
   console.log(req.body);
-  ClassList.create(req.body.post,function (err,post) {
+  classinput.create(req.body.post,function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.redirect('partials/user/user-list');
   });
 });
 //show
 app.get('/user-list/:id', function(req,res){
-  ClassList.findById(req.params.id, function (err,post) {
+  classinput.findById(req.params.id, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.render("partials/user/user-list", {data:post});
   });
 });
 //edit
 app.get('/user-list/:id/edit', function(req,res){
-  ClassList.findById(req.params.id, function (err,post) {
+  classinput.findById(req.params.id, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.render("partials/user/user-list", {data:post});
   });
@@ -189,14 +189,14 @@ app.get('/user-list/:id/edit', function(req,res){
 //update
 app.put('/user-list/:id', function(req,res){
   req.body.post.updatedAt=Date.now();
-  ClassList.findByIdAndUpdate(req.params.id, req.body.post, function (err,post) {
+  classinput.findByIdAndUpdate(req.params.id, req.body.post, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.redirect('/partials/'+req.params.id);
   });
 });
 //delete
 app.delete('/user-list/:id', function(req,res){
-  ClassList.findByIdAndRemove(req.params.id, function (err,post) {
+  classinput.findByIdAndRemove(req.params.id, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.redirect('/partials/user/user-list');
   });
@@ -204,7 +204,7 @@ app.delete('/user-list/:id', function(req,res){
 
 ///index-organ
 app.get('/organ',function(req,res){
-  Organ.find({}).sort('-createdAt').exec(function(err,post2){
+  classinput.find({}).sort('-createdAt').exec(function(err,post2){
     if(err) return res.json({success:false, message:err});
     res.render("partials/lecture/organ",{data2:post2});
   });
@@ -212,21 +212,21 @@ app.get('/organ',function(req,res){
 //create
 app.post('/organ', function(req,res){
   console.log(req.body);
-  Organ.create(req.body.post2,function (err,post2) {
+  classinput.create(req.body.post2,function (err,post2) {
     if(err) return res.json({success:false, message:err});
     res.redirect('partials/lecture/organ');
   });
 });
 //show
 app.get('/organ/:id', function(req,res){
-  Organ.findById(req.params.id, function (err,post2) {
+  classinput.findById(req.params.id, function (err,post2) {
     if(err) return res.json({success:false, message:err});
     res.render("partials/lecture/organ", {data2:post2});
   });
 });
 //edit
 app.get('/organ/:id/edit', function(req,res){
-    Organ.findById(req.params.id, function (err,post2) {
+    classinput.findById(req.params.id, function (err,post2) {
     if(err) return res.json({success:false, message:err});
     res.render("partials/lecture/organ-edit", {data2:post2});
   });
@@ -234,14 +234,14 @@ app.get('/organ/:id/edit', function(req,res){
 //update
 app.put('/organ/:id', function(req,res){
   req.body.post2.updatedAt=Date.now();
-  Organ.findByIdAndUpdate(req.params.id, req.body.post2, function (err,post2) {
+  classinput.findByIdAndUpdate(req.params.id, req.body.post2, function (err,post2) {
     if(err) return res.json({success:false, message:err});
     res.redirect('/partials/lecture/organ/'+req.params.id);
   });
 });
 //delete
 app.delete('/organ/:id', function(req,res){
-  Organ.findByIdAndRemove(req.params.id, function (err,post2) {
+  classinput.findByIdAndRemove(req.params.id, function (err,post2) {
     if(err) return res.json({success:false, message:err});
     res.redirect('/partials/lecture/organ');
   });
@@ -256,21 +256,21 @@ app.get('/class-info',function(req,res){
 //create
 app.post('/class-info', function(req,res){
   console.log(req.body);
-  ClassList.create(req.body.post,function (err,post) {
+  classinput.create(req.body.post,function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.redirect('partials/lecture/class-info');
   });
 });
 //show
 app.get('/class-info/:id', function(req,res){
-  ClassList.findById(req.params.id, function (err,post) {
+  classinput.findById(req.params.id, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.render("partials/lecture/class-info", {data:post});
   });
 });
 //edit
 app.get('/class-info/:id/edit', function(req,res){
-  ClassList.findById(req.params.id, function (err,post) {
+  classinput.findById(req.params.id, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.render("partials/lecture/class-info", {data:post});
   });
@@ -278,14 +278,14 @@ app.get('/class-info/:id/edit', function(req,res){
 //update
 app.put('/class-info/:id', function(req,res){
   req.body.post.updatedAt=Date.now();
-  ClassList.findByIdAndUpdate(req.params.id, req.body.post, function (err,post) {
+  classinput.findByIdAndUpdate(req.params.id, req.body.post, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.redirect('/partials/'+req.params.id);
   });
 });
 //delete
 app.delete('/class-info/:id', function(req,res){
-  ClassList.findByIdAndRemove(req.params.id, function (err,post) {
+  classinput.findByIdAndRemove(req.params.id, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.redirect('/partials/lecture/class-info');
   });
@@ -301,21 +301,21 @@ app.get('/user-info',function(req,res){
 //create
 app.post('/user-info', function(req,res){
   console.log(req.body);
-  ClassList.create(req.body.post,function (err,post) {
+  classinput.create(req.body.post,function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.redirect('partials/user/user-info');
   });
 });
 //show
 app.get('/user-info/:id', function(req,res){
-  ClassList.findById(req.params.id, function (err,post) {
+  classinput.findById(req.params.id, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.render("partials/user/user-info", {data:post});
   });
 });
 //edit
 app.get('/user-info/:id/edit', function(req,res){
-  ClassList.findById(req.params.id, function (err,post) {
+  classinput.findById(req.params.id, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.render("partials/user/user-info", {data:post});
   });
@@ -323,14 +323,14 @@ app.get('/user-info/:id/edit', function(req,res){
 //update
 app.put('/user-info/:id', function(req,res){
   req.body.post.updatedAt=Date.now();
-  ClassList.findByIdAndUpdate(req.params.id, req.body.post, function (err,post) {
+  classinput.findByIdAndUpdate(req.params.id, req.body.post, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.redirect('/partials/'+req.params.id);
   });
 });
 //delete
 app.delete('/user-info/:id', function(req,res){
-  ClassList.findByIdAndRemove(req.params.id, function (err,post) {
+  classinput.findByIdAndRemove(req.params.id, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.redirect('/partials/user/user-info');
   });
@@ -340,7 +340,7 @@ app.delete('/user-info/:id', function(req,res){
 
 ///index-instructorlist
 app.get('/instructor-list',function(req,res){
-  ClassList.find({}).sort('-createdAt').exec(function(err,posts){
+  classinput.find({}).sort('-createdAt').exec(function(err,posts){
     if(err) return res.json({success:false, message:err});
     res.render('partials/user/instructor-list',{data:posts});
   });
@@ -348,21 +348,21 @@ app.get('/instructor-list',function(req,res){
 //create
 app.post('/instructor-list', function(req,res){
   console.log(req.body);
-  ClassList.create(req.body.post,function (err,post) {
+  classinput.create(req.body.post,function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.redirect('partials/user/instructor-list');
   });
 });
 //show
 app.get('/instructor-list/:id', function(req,res){
-  ClassList.findById(req.params.id, function (err,post) {
+  classinput.findById(req.params.id, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.render("partials/user/instructor-list", {data:post});
   });
 });
 //edit
 app.get('/instructor-list/:id/edit', function(req,res){
-  ClassList.findById(req.params.id, function (err,post) {
+  classinput.findById(req.params.id, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.render("partials/user/instructor-list", {data:post});
   });
@@ -370,21 +370,21 @@ app.get('/instructor-list/:id/edit', function(req,res){
 //update
 app.put('/instructor-list/:id', function(req,res){
   req.body.post.updatedAt=Date.now();
-  ClassList.findByIdAndUpdate(req.params.id, req.body.post, function (err,post) {
+  classinput.findByIdAndUpdate(req.params.id, req.body.post, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.redirect('/partials/'+req.params.id);
   });
 });
 //delete
 app.delete('/instructor-list/:id', function(req,res){
-  ClassList.findByIdAndRemove(req.params.id, function (err,post) {
+  classinput.findByIdAndRemove(req.params.id, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.redirect('/partials/user/instructor-list');
   });
 });
 ///index-instructor-info
 app.get('/instructor-info',function(req,res){
-  ClassList.find({}).sort('-createdAt').exec(function(err,posts){
+  classinput.find({}).sort('-createdAt').exec(function(err,posts){
     if(err) return res.json({success:false, message:err});
     res.render('partials/user/instructor-info',{data:posts});
   });
@@ -392,21 +392,21 @@ app.get('/instructor-info',function(req,res){
 //create
 app.post('/instructor-info', function(req,res){
   console.log(req.body);
-  ClassList.create(req.body.post,function (err,post) {
+  classinput.create(req.body.post,function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.redirect('partials/user/instructor-info');
   });
 });
 //show
 app.get('/instructor-info/:id', function(req,res){
-  ClassList.findById(req.params.id, function (err,post) {
+  classinput.findById(req.params.id, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.render("partials/user/instructor-info", {data:post});
   });
 });
 //edit
 app.get('/instructor-info/:id/edit', function(req,res){
-  ClassList.findById(req.params.id, function (err,post) {
+  classinput.findById(req.params.id, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.render("partials/user/instructor-info", {data:post});
   });
@@ -414,14 +414,14 @@ app.get('/instructor-info/:id/edit', function(req,res){
 //update
 app.put('/instructor-info/:id', function(req,res){
   req.body.post.updatedAt=Date.now();
-  ClassList.findByIdAndUpdate(req.params.id, req.body.post, function (err,post) {
+  classinput.findByIdAndUpdate(req.params.id, req.body.post, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.redirect('/partials/'+req.params.id);
   });
 });
 //delete
 app.delete('/instructor-info/:id', function(req,res){
-  ClassList.findByIdAndRemove(req.params.id, function (err,post) {
+  classinput.findByIdAndRemove(req.params.id, function (err,post) {
     if(err) return res.json({success:false, message:err});
     res.redirect('/partials/user/instructor-info');
   });
