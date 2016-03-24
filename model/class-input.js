@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var classinput = mongoose.Schema({
-    class: {type: String, required: true},
+    class_name: {type: String, required: true},
     class_state: {type: String, required: true},
     class_index: {type: String, required: true},
     class_field: {type: String, required: true},
@@ -22,9 +22,10 @@ var classinput = mongoose.Schema({
     material_cost: {type: String, required: true},
     register_method: {type: String, required: true},
     phone: {type: String, required: true},
-    content: {type: String, required: true},
+    content:{type:String,required:true},
     createdAt: {type: Date, default: Date.now},
     updatedAt: Date
+
 });
 
 module.exports = classinput;

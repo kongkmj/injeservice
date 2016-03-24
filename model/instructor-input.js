@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var userinput = mongoose.Schema({
+var instructorinput = mongoose.Schema({
     name:{type:String,required:true},
     sex:{type:String,required:true},
     birth:{type:String,required:true},
@@ -14,4 +14,4 @@ var userinput = mongoose.Schema({
 
 });
 
-module.exports=userinput;
+module.exports=instructorinput;

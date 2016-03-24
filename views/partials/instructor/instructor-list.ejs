@@ -301,10 +301,10 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-md-8">
-                <h1 class="page-header" >학생목록</h1>
+                <h1 class="page-header" >강사목록</h1>
             </div>
             <div class="col-md-4" style="text-align:right;padding-top:75px";>
-                <a href="/user-input"   class="btn btn-primary"  >추가</a>
+                <a href="/instructor-input"   class="btn btn-primary"  >추가</a>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -332,14 +332,14 @@
 
 
                                 <tbody>
-                                <% data.forEach(function(list2){%>
+                                <% data.forEach(function(list3){%>
                                 <tr>
-                                    <td><a href="/user-list/<%=list2._id%>"><%=list2.name%></a></td>
-                                    <td><%=list2.sex%></td>
-                                    <td><%=list2.birth%></td>
-                                    <td><%=list2.address%></td>
-                                    <td><%=list2.class_name%></td>
-                                    <td><%=list2.mobilephone%></td>
+                                    <td><a href="/instructor-list/<%=list3._id%>"><%=list3.name%></a></td>
+                                    <td><%=list3.sex%></td>
+                                    <td><%=list3.birth%></td>
+                                    <td><%=list3.address%></td>
+                                    <td><%=list3.class_name%></td>
+                                    <td><%=list3.mobilephone%></td>
                                 </tr>
                                 <% })%>
 
