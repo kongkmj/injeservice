@@ -57,9 +57,13 @@ app.use(methodOverride("_method"));
 //set route
 
 ///page
+
 app.get('/', function (req, res) {
-    res.render('partials/index');
-});
+    classinput.find({}).sort('-createdAt').exec(function (err, list) {
+        if (err) return res.json({success: false, message: err});
+        res.render("partials/index", {data: list});
+        });
+    });
 app.get('/login', function (req, res) {
     res.render('partials/login');
 });
